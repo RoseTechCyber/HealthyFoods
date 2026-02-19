@@ -5,11 +5,14 @@ Test configuration and fixtures
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+from app.services.ai_agent import AIAgentOrchestrator
 
 
 @pytest.fixture
 def client():
     """Test client fixture"""
+    # Initialize AI orchestrator for tests
+    app.state.ai_orchestrator = AIAgentOrchestrator()
     return TestClient(app)
 
 
