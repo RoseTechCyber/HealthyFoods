@@ -35,7 +35,7 @@ async def test_validate_order_success():
     )
     
     result = await orchestrator.validate_order(order)
-    assert result["is_valid"] == True
+    assert result["is_valid"] is True
     assert len(result["issues"]) == 0
 
 
@@ -53,7 +53,7 @@ async def test_validate_order_fails_no_items():
     )
     
     result = await orchestrator.validate_order(order)
-    assert result["is_valid"] == False
+    assert result["is_valid"] is False
     assert "no items" in result["issues"][0].lower()
 
 

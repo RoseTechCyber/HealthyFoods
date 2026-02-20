@@ -73,8 +73,23 @@ def setup_security(app: FastAPI):
 
 def verify_api_key(api_key: str) -> bool:
     """Verify API key for authentication"""
-    # In production, verify against Azure Key Vault or database
-    return True
+    if not api_key:
+        return False
+    
+    # Get configured API keys from settings
+    configured_api_keys = settings.API_KEYS
+    
+    if not configured_api_keys:
+        # If no API keys are configured, fail closed for security
+        logger.warning("API key verification attempted but no API keys are configured.")
+        return False
+    
+    # Use constant-time comparison to avoid timing attacks
+    for valid_key in configured_api_keys:
+        if valid_key and hmac.compare_digest(api_key, valid_key):
+            return True
+    
+    return False
 
 
 def hash_sensitive_data(data: str) -> str:

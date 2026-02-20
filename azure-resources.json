@@ -22,7 +22,8 @@
     "webAppName": "[parameters('appName')]",
     "openAIName": "[concat(parameters('appName'), '-openai')]",
     "contentSafetyName": "[concat(parameters('appName'), '-contentsafety')]",
-    "storageAccountName": "[concat(parameters('appName'), 'storage')]",
+    "sanitizedAppName": "[toLower(replace(parameters('appName'), '-', ''))]",
+    "storageAccountName": "[substring(concat(variables('sanitizedAppName'), 'storage'), 0, min(24, length(concat(variables('sanitizedAppName'), 'storage'))))]",
     "serviceBusNamespace": "[concat(parameters('appName'), '-sb')]",
     "appInsightsName": "[concat(parameters('appName'), '-insights')]"
   },

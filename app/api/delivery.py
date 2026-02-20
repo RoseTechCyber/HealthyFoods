@@ -6,11 +6,13 @@ from fastapi import APIRouter, HTTPException, Request
 from typing import List, Optional
 import uuid
 from datetime import datetime
+import logging
 
 from app.models.schemas import Delivery, DeliveryStatus
 from app.services.ai_agent import AIAgentOrchestrator
 from app.services.azure_services import AzurePowerAutomateService
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -39,12 +41,23 @@ async def assign_delivery(delivery: Delivery, request: Request):
     )
     
     delivery.driver_id = optimization_result["assigned_driver_id"]
-    delivery.estimated_arrival = datetime.fromisoformat(optimization_result["estimated_delivery_time"]) if optimization_result.get("estimated_delivery_time") else None
+    
+    # Parse estimated delivery time with error handling
+    estimated_time_str = optimization_result.get("estimated_delivery_time")
+    if estimated_time_str:
+        try:
+            delivery.estimated_arrival = datetime.fromisoformat(estimated_time_str)
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Failed to parse estimated delivery time: {e}")
+            delivery.estimated_arrival = None
+    else:
+        delivery.estimated_arrival = None
+    
     delivery.status = DeliveryStatus.ASSIGNED
     
     # Trigger Azure Power Automate workflow
     power_automate = AzurePowerAutomateService()
-    await power_automate.trigger_delivery_workflow(delivery.dict())
+    await power_automate.trigger_delivery_workflow(delivery.model_dump())
     
     return delivery
 

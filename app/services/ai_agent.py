@@ -104,11 +104,11 @@ class AIAgentOrchestrator:
             "confidence": 0.7
         }
     
-    async def process_payment_validation(self, order: Order, payment_details: Dict) -> Dict:
+    async def process_payment_validation(self, order: Optional[Order], payment_details: Dict) -> Dict:
         """
         Validate payment details using AI fraud detection
         """
-        logger.info(f"Validating payment for order: {order.id}")
+        logger.info(f"Validating payment for order: {order.id if order else 'None'}")
         
         payment_validation = {
             "is_valid": True,
@@ -117,7 +117,7 @@ class AIAgentOrchestrator:
         }
         
         # Basic payment validation
-        if payment_details.get("amount") != order.total_amount:
+        if order and payment_details.get("amount") != order.total_amount:
             payment_validation["is_valid"] = False
             payment_validation["recommendations"].append("Amount mismatch detected")
         
@@ -131,13 +131,13 @@ class AIAgentOrchestrator:
         
         return payment_validation
     
-    async def optimize_delivery_route(self, order: Order, available_drivers: List[Dict]) -> Dict:
+    async def optimize_delivery_route(self, order: Optional[Order], available_drivers: List[Dict]) -> Dict:
         """
         Optimize delivery route and driver assignment
         - Considers driver location, capacity, ratings
         - Estimates delivery time
         """
-        logger.info(f"Optimizing delivery for order: {order.id}")
+        logger.info(f"Optimizing delivery for order: {order.id if order else 'None'}")
         
         if not available_drivers:
             return {

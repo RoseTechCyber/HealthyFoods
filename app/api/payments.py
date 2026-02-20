@@ -30,7 +30,7 @@ async def process_payment(payment: Payment, request: Request):
     # Validate payment with AI-powered fraud detection
     validation_result = await ai_orchestrator.process_payment_validation(
         order=None,  # In production, retrieve order from database
-        payment_details=payment.dict()
+        payment_details=payment.model_dump()
     )
     
     if not validation_result["is_valid"]:
@@ -49,7 +49,7 @@ async def process_payment(payment: Payment, request: Request):
     
     # Trigger Azure Power Automate workflow
     power_automate = AzurePowerAutomateService()
-    await power_automate.trigger_payment_workflow(payment.dict())
+    await power_automate.trigger_payment_workflow(payment.model_dump())
     
     return payment
 

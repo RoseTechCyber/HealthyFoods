@@ -43,7 +43,7 @@ async def create_order(order: Order, request: Request):
     
     # Trigger Azure Power Automate workflow
     power_automate = AzurePowerAutomateService()
-    await power_automate.trigger_order_workflow(order.dict())
+    await power_automate.trigger_order_workflow(order.model_dump())
     
     # Send message to Azure Service Bus
     service_bus = AzureServiceBusService()
