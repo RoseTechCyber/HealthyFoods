@@ -2,7 +2,7 @@
 Data models for HealthyFoods application
 """
 
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, ConfigDict
 from typing import Optional, List
 from datetime import datetime
 from enum import Enum
@@ -51,8 +51,8 @@ class Customer(BaseModel):
     preferences: Optional[dict] = None
     created_at: Optional[datetime] = None
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "name": "John Doe",
                 "email": "john@example.com",
@@ -61,6 +61,7 @@ class Customer(BaseModel):
                 "preferences": {"dietary": ["vegetarian"], "spice_level": "mild"}
             }
         }
+    )
 
 
 class CateringFirm(BaseModel):
@@ -77,8 +78,8 @@ class CateringFirm(BaseModel):
     menu_items: Optional[List[dict]] = None
     created_at: Optional[datetime] = None
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "name": "Healthy Bites",
                 "email": "contact@healthybites.com",
@@ -88,6 +89,7 @@ class CateringFirm(BaseModel):
                 "operating_hours": {"monday": "9:00-21:00", "tuesday": "9:00-21:00"}
             }
         }
+    )
 
 
 class MenuItem(BaseModel):
@@ -102,8 +104,8 @@ class MenuItem(BaseModel):
     ingredients: Optional[List[str]] = None
     is_available: bool = True
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "catering_firm_id": "firm123",
                 "name": "Grilled Chicken Salad",
@@ -113,6 +115,7 @@ class MenuItem(BaseModel):
                 "dietary_info": ["gluten-free", "high-protein"]
             }
         }
+    )
 
 
 class OrderItem(BaseModel):
@@ -138,8 +141,8 @@ class Order(BaseModel):
     updated_at: Optional[datetime] = None
     estimated_delivery_time: Optional[datetime] = None
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "customer_id": "cust123",
                 "catering_firm_id": "firm123",
@@ -155,6 +158,7 @@ class Order(BaseModel):
                 "delivery_address": "123 Main St, City, State"
             }
         }
+    )
 
 
 class Payment(BaseModel):
@@ -168,8 +172,8 @@ class Payment(BaseModel):
     created_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "order_id": "order123",
                 "amount": 25.98,
@@ -177,6 +181,7 @@ class Payment(BaseModel):
                 "status": "completed"
             }
         }
+    )
 
 
 class Delivery(BaseModel):
@@ -190,8 +195,8 @@ class Delivery(BaseModel):
     current_location: Optional[dict] = None
     estimated_arrival: Optional[datetime] = None
     
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "order_id": "order123",
                 "driver_id": "driver456",
@@ -199,6 +204,7 @@ class Delivery(BaseModel):
                 "estimated_arrival": "2026-02-19T15:30:00"
             }
         }
+    )
 
 
 class AIAgentDecision(BaseModel):

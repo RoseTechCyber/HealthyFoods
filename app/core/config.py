@@ -3,7 +3,7 @@ Configuration settings for HealthyFoods application
 Integrates with Azure services and Microsoft Foundry
 """
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List, Optional
 from pydantic import Field
 import sys
@@ -11,6 +11,8 @@ import sys
 
 class Settings(BaseSettings):
     """Application settings"""
+
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
     
     # Application settings
     APP_NAME: str = "HealthyFoods"
@@ -61,11 +63,6 @@ class Settings(BaseSettings):
     # Rate limiting
     RATE_LIMIT_PER_MINUTE: int = 60
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
-
-
 try:
     settings = Settings()
 except Exception as e:
