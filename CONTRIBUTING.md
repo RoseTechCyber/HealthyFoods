@@ -1,6 +1,6 @@
-# Contributing to HealthyFoods2
+# Contributing to HealthyFoods
 
-Thank you for your interest in contributing to HealthyFoods2! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing to HealthyFoods! This document provides guidelines for contributing to the project.
 
 ## Code of Conduct
 
@@ -61,8 +61,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ```bash
 # Clone the repository
-git clone https://github.com/RoseTechCyber/HealthyFoods2.git
-cd HealthyFoods2
+git clone https://github.com/RoseTechCyber/HealthyFoods.git
+cd HealthyFoods
 
 # Create virtual environment
 python -m venv venv
@@ -200,4 +200,4 @@ Contributors will be acknowledged in:
 - Release notes
 - Annual contributor report
 
-Thank you for contributing to HealthyFoods2! 🎉
+Thank you for contributing to HealthyFoods! 🎉

@@ -1,7 +1,7 @@
 # Security Summary
 
 ## Overview
-All security vulnerabilities have been identified and patched in the HealthyFoods2 application.
+All security vulnerabilities have been identified and patched in the HealthyFoods application.
 
 ## Vulnerability Fixes Applied
 

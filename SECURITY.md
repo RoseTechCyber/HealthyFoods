@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-We take the security of HealthyFoods2 seriously. If you discover a security vulnerability, please report it to us as described below.
+We take the security of HealthyFoods seriously. If you discover a security vulnerability, please report it to us as described below.
 
 ### How to Report a Security Vulnerability
 
@@ -114,7 +114,7 @@ We use the following tools for automated security scanning:
 
 ## Compliance
 
-HealthyFoods2 is designed to comply with:
+HealthyFoods is designed to comply with:
 
 - GDPR (General Data Protection Regulation)
 - CCPA (California Consumer Privacy Act)

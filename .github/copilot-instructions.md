@@ -6,14 +6,14 @@
 - Preserve the product intent documented in `README.md`: an AI-mediated food-order workflow (validation, payment, routing, delivery).
 
 ## Source of truth
-- Product direction: `README.md` (currently titled `# HealthyFoods2`).
+- Product direction: `README.md`.
 - Legal constraints: `LICENSE`.
 - There are no additional agent rule files (`AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.) in this repo right now.
 
 ## How to make changes in this codebase
 - Prefer small, foundational changes that establish structure (for example: initial app skeleton, docs, and basic tooling) over speculative feature depth.
 - When adding new code, document assumptions in the same PR/change (because no architecture docs exist yet).
-- Keep naming aligned with repository identity (`HealthyFoods`) and call out any deliberate differences from README naming (`HealthyFoods2`).
+- Keep naming aligned with repository identity (`HealthyFoods`).
 - Do not introduce multiple frameworks or polyglot stacks in one pass; choose one stack per iteration and keep it consistent.
 
 ## Workflow expectations

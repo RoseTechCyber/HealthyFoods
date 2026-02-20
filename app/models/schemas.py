@@ -1,5 +1,5 @@
 """
-Data models for HealthyFoods2 application
+Data models for HealthyFoods application
 """
 
 from pydantic import BaseModel, Field, EmailStr

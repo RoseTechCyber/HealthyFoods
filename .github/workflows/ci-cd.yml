@@ -27,7 +27,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest pytest-cov pytest-asyncio
     
     - name: Run tests
       run: |
@@ -76,11 +75,11 @@ jobs:
     
     - name: Build Docker image
       run: |
-        docker build -t healthyfoods2:${{ github.sha }} .
+        docker build -t healthyfoods:${{ github.sha }} .
     
     - name: Run container test
       run: |
-        docker run -d -p 8000:8000 --name test-container healthyfoods2:${{ github.sha }}
+        docker run -d -p 8000:8000 --name test-container healthyfoods:${{ github.sha }}
         sleep 10
         curl -f http://localhost:8000/health || exit 1
         docker stop test-container
@@ -104,8 +103,8 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: healthyfoods2
-        images: 'healthyfoods2:${{ github.sha }}'
+        app-name: healthyfoods
+        images: 'healthyfoods:${{ github.sha }}'
     
     - name: Deployment notification
       run: |

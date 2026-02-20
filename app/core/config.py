@@ -1,5 +1,5 @@
 """
-Configuration settings for HealthyFoods2 application
+Configuration settings for HealthyFoods application
 Integrates with Azure services and Microsoft Foundry
 """
 
@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     """Application settings"""
     
     # Application settings
-    APP_NAME: str = "HealthyFoods2"
+    APP_NAME: str = "HealthyFoods"
     DEBUG: bool = False
     API_V1_STR: str = "/api/v1"
     

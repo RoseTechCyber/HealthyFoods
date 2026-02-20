@@ -2,7 +2,7 @@
 apiVersion: 2019-08-01
 location: eastus
 properties:
-  name: healthyfoods2
+  name: healthyfoods
   serverFarmId: /subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Web/serverfarms/{app-service-plan}
   siteConfig:
     appSettings:
@@ -12,7 +12,7 @@ properties:
         value: "8000"
       - name: SCM_DO_BUILD_DURING_DEPLOYMENT
         value: "true"
-    linuxFxVersion: DOCKER|healthyfoods2:latest
+    linuxFxVersion: DOCKER|healthyfoods:latest
     alwaysOn: true
     http20Enabled: true
     minTlsVersion: "1.2"
@@ -20,4 +20,4 @@ properties:
   httpsOnly: true
 tags:
   environment: production
-  application: healthyfoods2
+  application: healthyfoods

@@ -12,7 +12,7 @@ def test_root_endpoint(client):
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "operational"
-    assert "HealthyFoods2" in data["message"]
+    assert "HealthyFoods" in data["message"]
 
 
 def test_health_check(client):
@@ -21,7 +21,7 @@ def test_health_check(client):
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "healthy"
-    assert data["service"] == "HealthyFoods2"
+    assert data["service"] == "HealthyFoods"
 
 
 def test_api_docs_available(client):

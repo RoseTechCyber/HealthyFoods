@@ -1,9 +1,9 @@
-# API Documentation - HealthyFoods2
+# API Documentation - HealthyFoods
 
 ## Base URL
 
 ```
-Production: https://healthyfoods2.azurewebsites.net
+Production: https://healthyfoods.azurewebsites.net
 Development: http://localhost:8000
 ```
 
@@ -26,7 +26,7 @@ Health check endpoint
 ```json
 {
   "status": "healthy",
-  "service": "HealthyFoods2",
+  "service": "HealthyFoods",
   "version": "1.0.0"
 }
 ```
@@ -358,7 +358,7 @@ import requests
 
 # Create order
 response = requests.post(
-    "https://healthyfoods2.azurewebsites.net/api/v1/orders",
+    "https://healthyfoods.azurewebsites.net/api/v1/orders",
     json={
         "customer_id": "cust123",
         "catering_firm_id": "firm456",
@@ -377,7 +377,7 @@ print(f"Order created: {order['id']}")
 
 ```javascript
 // Create order
-const response = await fetch('https://healthyfoods2.azurewebsites.net/api/v1/orders', {
+const response = await fetch('https://healthyfoods.azurewebsites.net/api/v1/orders', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',

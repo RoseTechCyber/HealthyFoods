@@ -1,9 +1,9 @@
-# HealthyFoods2 - AI Agentic Food Ordering Platform
+# HealthyFoods - AI Agentic Food Ordering Platform
 
-[![CI/CD](https://github.com/RoseTechCyber/HealthyFoods2/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/RoseTechCyber/HealthyFoods2/actions)
+[![CI/CD](https://github.com/RoseTechCyber/HealthyFoods/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/RoseTechCyber/HealthyFoods/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-HealthyFoods2 is an advanced AI Agentic Web Application tailored for real-time, 24/7 intelligent processing, validation, payment, routing and delivery of food orders. The platform connects customers with subscribed catering firms through an intelligent AI Agent that serves as a mediator.
+HealthyFoods is an advanced AI Agentic Web Application tailored for real-time, 24/7 intelligent processing, validation, payment, routing and delivery of food orders. The platform connects customers with subscribed catering firms through an intelligent AI Agent that serves as a mediator.
 
 ## 🌟 Features
 
@@ -57,8 +57,8 @@ The application follows a modern microservices architecture:
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/RoseTechCyber/HealthyFoods2.git
-cd HealthyFoods2
+git clone https://github.com/RoseTechCyber/HealthyFoods.git
+cd HealthyFoods
 ```
 
 2. **Set up environment variables**
@@ -151,7 +151,7 @@ Key environment variables (see `.env.example` for complete list):
 1. **Deploy Azure Resources**
 ```bash
 az deployment group create \
-  --resource-group healthyfoods2-rg \
+  --resource-group healthyfoods-rg \
   --template-file azure-resources.json
 ```
 
@@ -162,8 +162,8 @@ az deployment group create \
 3. **Configure Azure Web App**
 ```bash
 az webapp config appsettings set \
-  --resource-group healthyfoods2-rg \
-  --name healthyfoods2 \
+  --resource-group healthyfoods-rg \
+  --name healthyfoods \
   --settings @appsettings.json
 ```
 
@@ -171,7 +171,7 @@ az webapp config appsettings set \
 
 Run tests:
 ```bash
-pytest tests/ --cov=app
+SECRET_KEY='test-secret-key-for-ci' python -m pytest tests/ --cov=app
 ```
 
 ## 📊 Monitoring

@@ -1,5 +1,5 @@
 """
-Main application entry point for HealthyFoods2 AI Agentic Web Application
+Main application entry point for HealthyFoods AI Agentic Web Application
 """
 
 from fastapi import FastAPI, HTTPException
@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
-    logger.info("Starting HealthyFoods2 AI Agentic Web Application")
+    logger.info("Starting HealthyFoods AI Agentic Web Application")
     
     # Initialize AI Agent Orchestrator
     ai_orchestrator = AIAgentOrchestrator()
@@ -33,12 +33,12 @@ async def lifespan(app: FastAPI):
     
     yield
     
-    logger.info("Shutting down HealthyFoods2 Application")
+    logger.info("Shutting down HealthyFoods Application")
 
 
 # Create FastAPI application
 app = FastAPI(
-    title="HealthyFoods2 AI Agentic Platform",
+    title="HealthyFoods AI Agentic Platform",
     description="Real-time, 24/7 intelligent food ordering and delivery system",
     version="1.0.0",
     lifespan=lifespan
@@ -68,7 +68,7 @@ app.include_router(delivery.router, prefix="/api/v1/delivery", tags=["Delivery"]
 async def root():
     """Root endpoint"""
     return {
-        "message": "Welcome to HealthyFoods2 AI Agentic Platform",
+        "message": "Welcome to HealthyFoods AI Agentic Platform",
         "version": "1.0.0",
         "status": "operational"
     }
@@ -79,7 +79,7 @@ async def health_check():
     """Health check endpoint for monitoring"""
     return {
         "status": "healthy",
-        "service": "HealthyFoods2",
+        "service": "HealthyFoods",
         "version": "1.0.0"
     }
 

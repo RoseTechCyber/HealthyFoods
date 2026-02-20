@@ -4,7 +4,7 @@
   "parameters": {
     "appName": {
       "type": "string",
-      "defaultValue": "healthyfoods2",
+      "defaultValue": "healthyfoods",
       "metadata": {
         "description": "Name of the application"
       }
@@ -55,7 +55,7 @@
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
         "httpsOnly": true,
         "siteConfig": {
-          "linuxFxVersion": "DOCKER|healthyfoods2:latest",
+          "linuxFxVersion": "DOCKER|healthyfoods:latest",
           "alwaysOn": true,
           "http20Enabled": true
         }

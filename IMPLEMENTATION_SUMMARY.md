@@ -1,4 +1,4 @@
-# HealthyFoods2 Implementation Summary
+# HealthyFoods Implementation Summary
 
 ## Overview
 Successfully implemented a comprehensive AI Agentic Web Application for real-time food ordering and delivery platform with Azure integration.
@@ -143,7 +143,7 @@ docker-compose up -d
 ### Azure:
 ```bash
 az deployment group create \
-  --resource-group healthyfoods2-rg \
+  --resource-group healthyfoods-rg \
   --template-file azure-resources.json
 ```
 
@@ -187,7 +187,7 @@ az deployment group create \
 - Regular dependency updates via Dependabot
 
 ## Conclusion
-The HealthyFoods2 AI Agentic Web Application is production-ready with:
+The HealthyFoods AI Agentic Web Application is production-ready with:
 - ✅ Complete backend API
 - ✅ AI agent orchestration
 - ✅ Azure cloud integration

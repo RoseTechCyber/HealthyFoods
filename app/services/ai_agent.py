@@ -1,5 +1,5 @@
 """
-AI Agent Orchestrator - Core intelligence engine for HealthyFoods2
+AI Agent Orchestrator - Core intelligence engine for HealthyFoods
 Integrates with Azure OpenAI and Microsoft AI Services
 """
 
