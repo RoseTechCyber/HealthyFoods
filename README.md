@@ -46,6 +46,14 @@ The application follows a modern microservices architecture:
                            └──────▶ Analytics Engine
 ```
 
+## 📦 Installation
+
+Install directly from PyPI:
+
+```bash
+pip install healthyfoods
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites

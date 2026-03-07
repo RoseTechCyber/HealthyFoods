@@ -100,3 +100,14 @@ if __name__ == "__main__":
         reload=True,
         log_level="info"
     )
+
+
+def main() -> None:
+    """Entry point for the ``healthyfoods`` console script."""
+    import uvicorn
+    uvicorn.run(
+        "app.main:app",
+        host="0.0.0.0",
+        port=8000,
+        log_level="info",
+    )
