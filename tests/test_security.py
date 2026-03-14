@@ -3,6 +3,7 @@ Tests for security module - verifies imports work when module is loaded directly
 """
 
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -31,6 +32,28 @@ def test_security_module_imports():
     assert callable(hash_sensitive_data)
     assert callable(verify_webhook_signature)
     assert callable(setup_security)
+
+
+def test_security_module_runs_directly():
+    """Running app/core/security.py as a script exits with code 0 and no ModuleNotFoundError.
+
+    This is the regression guard for the sys.path bootstrap block in security.py:
+    if that block is removed, 'from app.core.config import settings' will raise
+    ModuleNotFoundError, causing a non-zero exit code.
+    """
+    env = {**os.environ, "SECRET_KEY": "test-secret-key-for-ci"}
+    result = subprocess.run(
+        [sys.executable, str(PROJECT_ROOT / "app" / "core" / "security.py")],
+        cwd=str(PROJECT_ROOT),
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, (
+        f"security.py exited with code {result.returncode}.\n"
+        f"stdout: {result.stdout}\nstderr: {result.stderr}"
+    )
+    assert "ModuleNotFoundError" not in result.stderr
 
 
 def test_verify_api_key_empty():
