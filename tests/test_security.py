@@ -15,7 +15,6 @@ os.environ.setdefault("SECRET_KEY", "test-secret-key-for-ci")
 import hashlib
 import hmac
 
-import pytest
 from app.core.security import (
     verify_api_key,
     hash_sensitive_data,
