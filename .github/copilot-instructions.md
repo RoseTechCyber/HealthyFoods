@@ -1,39 +1,83 @@
 # Copilot instructions for HealthyFoods
 
 ## Current repository reality
-- This repository is currently a minimal scaffold: `README.md` + `LICENSE` only.
-- Treat the project as **early-stage** and avoid assuming an existing framework, language, or deployment stack.
-- Preserve the product intent documented in `README.md`: an AI-mediated food-order workflow (validation, payment, routing, delivery).
+- This repository contains a **full FastAPI application**: `HealthyFoods` — an AI Agentic Food Ordering Platform.
+- The application is production-ready with Azure integration, CI/CD pipeline, Docker support, and a complete test suite.
+- Stack: **Python 3.11+**, **FastAPI**, **Pydantic v2**, **Azure OpenAI / Content Safety / Storage / Service Bus**, **Docker**.
 
 ## Source of truth
 - Product direction: `README.md`.
+- API reference: `API_DOCUMENTATION.md`.
 - Legal constraints: `LICENSE`.
-- There are no additional agent rule files (`AGENTS.md`, `CLAUDE.md`, `.cursorrules`, etc.) in this repo right now.
+- Deployment details: `DEPLOYMENT.md`.
+- Security posture: `SECURITY.md`, `SECURITY_SUMMARY.md`.
+
+## Existing agent rule files
+- This file (`.github/copilot-instructions.md`) is the only agent instruction file.
+
+## Application structure
+```
+app/
+  main.py               # FastAPI app entry-point, lifespan, routers, health check
+  core/
+    config.py           # Pydantic-settings (SECRET_KEY required via env)
+    security.py         # Middleware, hashing, webhook signature verification
+  api/
+    orders.py           # POST/GET /api/v1/orders
+    customers.py        # POST/GET /api/v1/customers
+    catering_firms.py   # POST/GET /api/v1/catering-firms
+    payments.py         # POST/GET /api/v1/payments
+    delivery.py         # POST/GET /api/v1/delivery
+  models/
+    schemas.py          # Pydantic v2 request/response schemas
+  services/
+    ai_agent.py         # AIAgentOrchestrator (Azure OpenAI-backed)
+    azure_services.py   # Azure Storage, Service Bus, Content Safety clients
+tests/
+  conftest.py           # Fixtures; sets SECRET_KEY=test-secret-key-for-ci
+  test_main.py          # Root / health endpoint tests
+  test_orders.py        # Order creation & validation tests
+  test_ai_agent.py      # AI agent logic tests
+  test_security.py      # Security module tests
+```
+
+## How to run locally
+```bash
+cp .env.example .env          # fill in your Azure credentials
+pip install -r requirements.txt
+python -m uvicorn app.main:app --reload
+# API docs: http://localhost:8000/docs
+```
+
+## How to test
+```bash
+export SECRET_KEY='test-secret-key-for-ci'
+pytest tests/ --cov=app
+```
+
+## How to build & run with Docker
+```bash
+docker build -t healthyfoods .
+docker run -p 8000:8000 --env-file .env healthyfoods
+```
 
 ## How to make changes in this codebase
-- Prefer small, foundational changes that establish structure (for example: initial app skeleton, docs, and basic tooling) over speculative feature depth.
-- When adding new code, document assumptions in the same PR/change (because no architecture docs exist yet).
+- Follow the existing module boundaries: API layer → service layer → Azure integrations.
 - Keep naming aligned with repository identity (`HealthyFoods`).
-- Do not introduce multiple frameworks or polyglot stacks in one pass; choose one stack per iteration and keep it consistent.
-
-## Workflow expectations
-- No build, test, lint, or run commands are currently defined in-repo.
-- If you add tooling, also add the canonical commands to `README.md` and keep them copy-paste runnable.
-- When creating the first runnable setup, include:
-  - dependency install command(s)
-  - local run command
-  - test command (if tests are introduced)
-  - brief troubleshooting notes for missing prerequisites
+- `SECRET_KEY` is a **required** environment variable — never hard-code it; always supply via env or secrets.
+- All new endpoints must have corresponding tests in `tests/`.
+- Update `API_DOCUMENTATION.md` when changing public API contracts.
 
 ## Architecture guidance for future edits
 - Maintain a clear separation between:
-  - user-facing ordering experience
-  - AI decision/mediation logic
-  - operational integrations (payment, routing, delivery providers)
-- Prefer explicit interface boundaries between these areas, since integrations are central to the product statement in `README.md`.
-- Record integration points early (provider name, auth method, request/response contracts) in docs as they are added.
+  - user-facing ordering experience (`app/api/`)
+  - AI decision/mediation logic (`app/services/ai_agent.py`)
+  - operational integrations (`app/services/azure_services.py`)
+- Prefer explicit interface boundaries between these areas.
+- Record integration points (provider name, auth method, request/response contracts) in `API_DOCUMENTATION.md` as they are added.
 
 ## What to avoid
-- Do not claim existing services, APIs, or infrastructure that are not present in the repository.
-- Do not add generic “best practice” docs disconnected from actual code introduced in the same change.
+- Do not add generic "best practice" docs disconnected from actual code.
 - Do not rename the repository or rewrite product scope without explicit user request.
+- Do not introduce multiple frameworks or polyglot stacks in one pass.
+- Do not commit real secrets — use `.env` locally and Azure Key Vault / GitHub Secrets in production.

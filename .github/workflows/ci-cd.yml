@@ -29,6 +29,8 @@ jobs:
         pip install -r requirements.txt
     
     - name: Run tests
+      env:
+        SECRET_KEY: test-secret-key-for-ci
       run: |
         pytest tests/ --cov=app --cov-report=xml --cov-report=html
     
@@ -79,7 +81,9 @@ jobs:
     
     - name: Run container test
       run: |
-        docker run -d -p 8000:8000 --name test-container healthyfoods:${{ github.sha }}
+        docker run -d -p 8000:8000 --name test-container \
+          -e SECRET_KEY='healthyfoods-ci-test-key' \
+          healthyfoods:${{ github.sha }}
         sleep 10
         curl -f http://localhost:8000/health || exit 1
         docker stop test-container
