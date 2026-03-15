@@ -51,13 +51,14 @@ python -m uvicorn app.main:app --reload
 
 ## How to test
 ```bash
-SECRET_KEY='test-secret-key-for-ci' pytest tests/ --cov=app
+export SECRET_KEY='test-secret-key-for-ci'
+pytest tests/ --cov=app
 ```
 
 ## How to build & run with Docker
 ```bash
 docker build -t healthyfoods .
-docker run -p 8000:8000 -e SECRET_KEY='your-secret-key' healthyfoods
+docker run -p 8000:8000 --env-file .env healthyfoods
 ```
 
 ## How to make changes in this codebase
