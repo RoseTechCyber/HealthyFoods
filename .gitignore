@@ -63,3 +63,6 @@ htmlcov/
 tmp/
 temp/
 *.tmp
+
+# Sync test artifacts
+.sync-test
